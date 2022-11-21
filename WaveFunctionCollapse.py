@@ -18,11 +18,15 @@ def isValid(matrix):
 
     return True
 
+# Normalize the weights
+
 
 def weightMatrix(matrix):
     for i, row in enumerate(matrix):
         nEntries = np.count_nonzero(row)
         matrix[i] = [1/nEntries if e != 0 else 0 for e in row]
+
+# Chooses the (i,j) element and updates the wave function
 
 
 def choose(i, j, matrix, resultArray):
@@ -36,6 +40,8 @@ def choose(i, j, matrix, resultArray):
     for k in range(rows):
         matrix[i][k] = 0
 
+# Choses the entry with the higher weight, when multiple entries have the same max value a random one is chosen
+
 
 def matrixArgMax(matrix):
     maxI, maxJ = np.unravel_index(np.argmax(matrix), matrix.shape)
@@ -45,6 +51,8 @@ def matrixArgMax(matrix):
     chosenMaxJ = np.random.choice(np.flatnonzero(row == row.max()))
 
     return (maxI, chosenMaxJ)
+
+# The Wave Function collapse algorithm
 
 
 def findMatches(adjacencyMatrix):
